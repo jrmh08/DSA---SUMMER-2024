@@ -9,7 +9,8 @@ void initStack(StackArrayList *s){
 
 StackArrayList createStack(){
 	StackArrayList s;
-	return s.top = -1;
+	s.top = -1;
+	return s;
 }
 
 bool isFull(StackArrayList s){
@@ -20,17 +21,21 @@ bool isEmpty(StackArrayList s){
 	return (s.top == -1);
 }
 
-bool stack_push(StackArrayList *s, int elem){
-	bool push = false;
-	if(isFull(s)){
+void stack_push(StackArrayList *s, int elem){
+	if(isFull(*s) != 1){
 		s->top++;
 		s->data[s->top] = elem;
-		push = true;
+	}else{
+		printf("Stack is full, can't push.'");
 	}
-	return push;
 }
 
-bool stack_pop(StackArrayList *s, int elem);
+void stack_pop(StackArrayList *s){
+	if(isEmpty(*s) != 1){
+		s->top--;
+	}
+}
+
 int stack_peek(StackArrayList *s);
 
 void display(StackArrayList s){
@@ -39,8 +44,8 @@ void display(StackArrayList s){
 
 void visualize(StackArrayList s){
 	int x;
-	printf("%-10s\t%-10s", "Index", "Value");
-	for(x = 0; x > s.top; x--){
-		printf("%-10d\t%-10d", x, s.data[x]);
+	printf("%s  |  %s", "Index", "Value\n");
+	for(x = 0; x < s.top + 1; x++){
+		printf("%3d    |  %3d\n", x, s.data[x]);
 	}
 }

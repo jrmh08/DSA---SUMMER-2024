@@ -22,10 +22,10 @@ clean: clean-custom
 	${RM} $(OBJ) $(BIN)
 
 $(BIN): $(OBJ)
-	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
 main.o: main.c
-	$(CPP) -c main.c -o main.o $(CXXFLAGS)
+	$(CC) -c main.c -o main.o $(CFLAGS)
 
 StackArray.o: StackArray.c
-	$(CPP) -c StackArray.c -o StackArray.o $(CXXFLAGS)
+	$(CC) -c StackArray.c -o StackArray.o $(CFLAGS)

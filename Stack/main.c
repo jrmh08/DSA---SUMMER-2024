@@ -9,6 +9,14 @@ int main(){
 	
 	initStack(&s);
 	stack_push(&s, 10);
+	stack_push(&s, 1);
+	stack_push(&s, 4);
+	stack_push(&s, 6);
+	stack_push(&s, 5);
+	stack_push(&s, 9);
+	visualize(s);
+	stack_pop(&s);
+	printf("\n\n");
 	visualize(s);
 	
 	return 0;
