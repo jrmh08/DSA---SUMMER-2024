@@ -16,9 +16,9 @@ StackArrayList createStack();
 bool isFull(StackArrayList s);
 bool isEmpty(StackArrayList s);
 
-void stack_push(StackArrayList *s, int elem);
-void stack_pop(StackArrayList *s);
-int stack_peek(StackArrayList *s);
+bool stack_push(StackArrayList *s, int elem);
+bool stack_pop(StackArrayList *s);
+int stack_peek(StackArrayList s);
 
 void display(StackArrayList s);
 void visualize(StackArrayList s);

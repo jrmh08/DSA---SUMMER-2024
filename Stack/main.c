@@ -14,10 +14,12 @@ int main(){
 	stack_push(&s, 6);
 	stack_push(&s, 5);
 	stack_push(&s, 9);
-	visualize(s);
+	display(s);
 	stack_pop(&s);
 	printf("\n\n");
-	visualize(s);
+	//display(s);
+	int top = stack_peek(s);
+	printf("The top of the stack is: %d", top);
 	
 	return 0;
 }

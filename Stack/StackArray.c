@@ -21,31 +21,55 @@ bool isEmpty(StackArrayList s){
 	return (s.top == -1);
 }
 
-void stack_push(StackArrayList *s, int elem){
-	if(isFull(*s) != 1){
+bool stack_push(StackArrayList *s, int elem){
+	bool push = true;
+	if(!isFull(*s)){
 		s->top++;
 		s->data[s->top] = elem;
+		printf("push successful\n");
 	}else{
-		printf("Stack is full, can't push.'");
+		printf("Stack is full, can't push.\n");
+		push = false;
 	}
+	return push;
 }
 
-void stack_pop(StackArrayList *s){
-	if(isEmpty(*s) != 1){
+bool stack_pop(StackArrayList *s){
+	bool pop = true;
+	if(!isEmpty(*s)){
 		s->top--;
+		printf("pop successful\n");
+	}else{
+		printf("list is empty\n");
+		pop = false;
 	}
+	return pop;
 }
 
-int stack_peek(StackArrayList *s);
+int stack_peek(StackArrayList s){
+	return s.data[s.top];
+}
 
 void display(StackArrayList s){
-	
+	StackArrayList temp = createStack();
+	int x;
+	printf("\n\nSTACK DISPLAY\n");
+	while(!isEmpty(s)){
+		x = s.data[s.top];
+		stack_push(&temp, x);
+		printf("%d\n", temp.data[temp.top]);
+		stack_pop(&s);
+	}
 }
 
 void visualize(StackArrayList s){
 	int x;
 	printf("%s  |  %s", "Index", "Value\n");
-	for(x = 0; x < s.top + 1; x++){
-		printf("%3d    |  %3d\n", x, s.data[x]);
+	for(x = s.top; x > -1; x--){
+		printf("%3d    |  %3d", x, s.data[x]);
+		if(s.data[x] == s.data[s.top]){
+			printf("   <-- TOP");
+		}
+		printf("\n");
 	}
 }
