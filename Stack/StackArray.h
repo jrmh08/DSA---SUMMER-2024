@@ -4,6 +4,7 @@
 #include<stdbool.h>
 
 #define MAX 10
+#define null -1
 
 typedef struct { 
 	int data[MAX];
@@ -25,5 +26,6 @@ void visualize(StackArrayList s);
 
 //others
 //create a function that would get all the even numbers and return as a new stack removing from the old stack
+StackArrayList getAllEven(StackArrayList *s);
 
 #endif

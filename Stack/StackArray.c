@@ -4,12 +4,12 @@
 #include "StackArray.h"
 
 void initStack(StackArrayList *s){
-	s->top = -1;
+	s->top = null;
 }
 
 StackArrayList createStack(){
 	StackArrayList s;
-	s.top = -1;
+	s.top = null;
 	return s;
 }
 
@@ -18,7 +18,7 @@ bool isFull(StackArrayList s){
 }
 
 bool isEmpty(StackArrayList s){
-	return (s.top == -1);
+	return (s.top == null);
 }
 
 bool stack_push(StackArrayList *s, int elem){
@@ -71,5 +71,17 @@ void visualize(StackArrayList s){
 			printf("   <-- TOP");
 		}
 		printf("\n");
+	}
+}
+
+StackArrayList getAllEven(StackArrayList *s){  
+	StackArrayList evenStack = createStack();
+	int x, even;
+	for(x = s->top; x > null && !isEmpty(*s); x--){
+		even = s->data[x];
+		if(even % 2 == 0){
+			stack_push(&evenStack, s->data[x]);
+		}
+		stack_pop(s);
 	}
 }
