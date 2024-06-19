@@ -41,12 +41,21 @@ bool isFull(CircularQ q){
 	return ((q.rear + 2) % MAX == q.front);
 }
 
-void display(CircularQ q){
-	int x, ctr = 0;
-	
-	for(x = q.front; x <= q.rear; x++){
-		printf("%d\n", q.data[x]);
-		ctr++;
+void display(CircularQ q) {
+    int x, ctr = 0;
+
+    if (isEmpty(q)) {
+        printf("Queue is empty\n");
+    }else{
+    	printf("Elements in the queue:\n");
+    
+	    for(x = q.front; x != q.rear; x = (x + 1) % MAX, ctr++){
+	    	printf("%d\n", q.data[x]);
+		}
+	    // Print the last element
+	    printf("%d\n", q.data[x]);
+	    ctr++;
 	}
-	printf("The number of elements in the queue are: %d\n", ctr);
+
+    printf("The number of elements in the queue are: %d\n", ctr);
 }

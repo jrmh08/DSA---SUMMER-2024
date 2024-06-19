@@ -77,11 +77,12 @@ void visualize(StackArrayList s){
 StackArrayList getAllEven(StackArrayList *s){  
 	StackArrayList evenStack = createStack();
 	int x, even;
-	for(x = s->top; x > null && !isEmpty(*s); x--){
+	for(x = s->top; x > null; x--){
 		even = s->data[x];
 		if(even % 2 == 0){
 			stack_push(&evenStack, s->data[x]);
 		}
 		stack_pop(s);
 	}
+	return evenStack;
 }

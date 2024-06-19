@@ -27,6 +27,11 @@ int main(int argc, char *argv[]) {
 	
 	printf("DEQUEUEING ELEMENTS:\n");
 	dequeue(&Q);
+	dequeue(&Q);
+	dequeue(&Q);
+	dequeue(&Q);
+	dequeue(&Q);
+	dequeue(&Q);
 	display(Q);
 	system("pause");
 	system("cls");
