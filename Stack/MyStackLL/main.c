@@ -15,6 +15,11 @@ int main(int argc, char *argv[]) {
 	stackLL_push(&L, 2);
 	stackLL_push(&L, 12);
 	visualize(L);
+	system("pause");
+	system("cls");
+	
+	stackLL_pop(&L);
+	visualize(L);
 	
 	return 0;
 }
