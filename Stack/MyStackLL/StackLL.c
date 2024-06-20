@@ -27,7 +27,7 @@ bool stackLL_push(StackLList *s, int elem){
 		s->top = newNode;
 		printf("push success.\n");
 	}else{
-		printf("push failed.\n");
+		printf("push failed\n");
 		push = false;
 	}
 	return push;
@@ -41,15 +41,17 @@ bool stackLL_pop(StackLList *s){
 		temp = s->top;
 		s->top = temp->next;
 		free(temp);
-		printf("pop success.");
+		printf("pop success.\n");
 	}else{
-		printf("pop failed.");
+		printf("pop failed.\n");
 		pop = false;
 	}
 	return pop;
 }
 
-int stackLL_peek(StackLList s);
+int stackLL_peek(StackLList s){
+	return s.top->data;
+}
 
 void display(StackLList s){
 	
@@ -57,9 +59,12 @@ void display(StackLList s){
 
 void visualize(StackLList s){
 	NodePtr trav;
-	printf()
+	
 	for(trav = s.top; trav != NULL; trav = trav->next){
-		printf("%d\n", trav->data);
+		printf("%d", trav->data);
+		if(trav->next == NULL){
+			printf(" <-- TOP", trav->data);
+		}
+		printf("\n");
 	}
-	printf("TOP is %d", trav->data);
 }
