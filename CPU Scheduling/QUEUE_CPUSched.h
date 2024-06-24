@@ -1,7 +1,7 @@
 #ifndef QUEUE_CPUSCHED
 #define QUEUE_CPUSCHED
 
-#include<stdlib.h>
+#include<stdbool.h>
 
 typedef struct{
 	char procLetter;
@@ -10,13 +10,27 @@ typedef struct{
 	int CT;
 	int TT;
 	int WT;
-}Process, *ProcessPtr;
+}Process;
 
 typedef struct node{
 	Process proc;
 	struct node* next;
-}ProcNode, ProcNodePtr;
+}ProcNode, *ProcNodePtr;
 
 typedef struct{
-	ProcNode
-};
+	ProcNodePtr front;
+	ProcNodePtr rear;
+}ProcQ, *ProcQPtr;
+
+void initProcQ(ProcQ *PQ);
+bool isEmpty(ProcQ PQ);
+ProcQ input();
+void enqueuePQ(ProcQ *PQ, Process p);
+void dequeuePQ(ProcQ *PQ);
+ProcQ display(ProcQ PQ);
+void visualizePQ(ProcQ PQ);
+
+
+
+#endif
+

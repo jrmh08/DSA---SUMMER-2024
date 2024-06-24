@@ -14,7 +14,8 @@ int main(int argc, char *argv[]) {
 	stackLL_push(&L, 8);
 	stackLL_push(&L, 2);
 	stackLL_push(&L, 12);
-	visualize(L);
+	display(L);
+//	visualize(L);
 	system("pause");
 	system("cls");
 	
