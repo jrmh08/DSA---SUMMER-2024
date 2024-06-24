@@ -45,16 +45,25 @@ void enqueuePQ(ProcQ *PQ, Process p){
 	
 	if(newNode != NULL){
 		newNode->proc = p;
-		newNode->next = PQ->front;
+		newNode->next = PQ->rear;
 		if(isEmpty(*PQ)){
 			PQ->front = newNode;
 			PQ->rear = newNode;
 		}else{
-			PQ->front = newNode;
+			PQ->rear = newNode;
 		}
 		printf("enqueue success!\n");
 	}else{
 		printf("enqueue failed!\n");
+	}
+}
+
+void dequeuePQ(ProcQ *PQ){
+	ProcNodePtr temp;
+	
+	if(!isEmpty(*PQ)){
+		temp = PQ->rear;
+		free(temp);
 	}
 }
 
@@ -63,14 +72,15 @@ ProcQ display(ProcQ PQ){
 	Process p;
 	
 	while(!isEmpty(PQ)){
-		p = PQ.front;
-		printf("Process %10c", trav->proc.procLetter);
-		printf("%10d", trav->proc.AT);
-		printf("%10d", trav->proc.BT);
+		p = PQ.front->proc;
+		printf("Process %10c", p.procLetter);
+		printf("%10d", p.AT);
+		printf("%10d", p.BT);
 		printf("\n");
 		enqueuePQ(&temp, p);
-		dequeuePQ()
+		dequeuePQ(&PQ);
 	}
+	return temp;
 }
 
 void visualizePQ(ProcQ PQ){

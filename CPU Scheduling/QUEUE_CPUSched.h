@@ -4,7 +4,7 @@
 #include<stdbool.h>
 
 typedef struct{
-	char procLetter;
+	char procLetter;            
 	int AT;
 	int BT;
 	int CT;

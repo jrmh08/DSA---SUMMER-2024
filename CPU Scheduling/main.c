@@ -9,8 +9,8 @@ int main(int argc, char *argv[]) {
 	initProcQ(&pq);
 	
 	pq = input();
-	display(pq)
-	visualizePQ(pq);
+	display(pq);
+//	visualizePQ(pq);
 	
 	return 0;
 }
