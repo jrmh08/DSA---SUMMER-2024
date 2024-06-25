@@ -27,6 +27,8 @@ bool isEmpty(ProcQ PQ);
 ProcQ input();
 void enqueuePQ(ProcQ *PQ, Process p);
 void dequeuePQ(ProcQ *PQ);
+ProcQ procSort(ProcQ *PQ);
+void CPU_FCFS(ProcQ *PQ);
 ProcQ display(ProcQ PQ);
 void visualizePQ(ProcQ PQ);
 

@@ -74,25 +74,34 @@ void dequeuePQ(ProcQ *PQ){
 }
 
 ProcQ procSort(ProcQ *PQ){
-	Proc sorted = createPQ();
-	ProcNodePtr trav = PQ->front;
+	ProcQ sorted = createPQ();
+	ProcNodePtr *trav;
+	ProcNodePtr temp;
 	int ctr = 0;
 	
-	while(trav != NULL){
-		while(PQ->front->proc.AT == ctr ){
-			enqueuePQ(PQ, PQ->front->proc);
-			trav = trav->next;
+	while(!isEmpty(*PQ)){
+		for(trav = PQ->front; *trav != NULL; trav = &(*trav)->next){
+			if(PQ->front->proc.AT == ctr){
+				temp = *trav;
+				enqueuePQ(&sorted, (*trav)->proc);
+				if((*trav)->next != NULL){
+					*trav = (*trav)->next;
+				}
+				free(temp);	
+			}
 		}
 		ctr++;
 	}
+	return sorted;
 }
 
-void CPU_FCFS(ProcQ)
+void CPU_FCFS(ProcQ *PQ){
+}
 
 ProcQ display(ProcQ PQ){
 	ProcQ temp = createPQ();
 	Process p;
-	
+	printf("Process %10s%10s%10s%10s%10s\n", "AT", "BT", "CT", "TT", "WT");
 	while(!isEmpty(PQ)){
 		p = PQ.front->proc;
 		printf("Process %10c", p.procLetter);
@@ -108,7 +117,7 @@ ProcQ display(ProcQ PQ){
 void visualizePQ(ProcQ PQ){
 	ProcNodePtr trav;
 	
-	printf("Process %10s%10s\n", "AT", "BT");
+	printf("Process %10s%10s%10s%10s%10s\n", "AT", "BT", "CT", "TT", "WT");
 	for(trav = PQ.front; trav != NULL; trav = trav->next){
 		printf("Process %10c", trav->proc.procLetter);
 		printf("%10d", trav->proc.AT);
