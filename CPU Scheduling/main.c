@@ -6,10 +6,9 @@
 
 int main(int argc, char *argv[]) {
 	ProcQ pq;
-	initProcQ(&pq);
 	
 	pq = input();
-	display(pq);
+	pq = display(pq);
 //	visualizePQ(pq);
 	
 	return 0;

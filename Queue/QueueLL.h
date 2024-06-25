@@ -6,7 +6,7 @@
 typedef struct node{
 	int data;
 	struct node * next;
-}Node, NodePtr*;
+}Node, *NodePtr;
 
 typedef struct{
 	NodePtr front;
@@ -19,3 +19,8 @@ void dequeue(Queue *q);
 int front(Queue q);
 int rear(Queue q);
 bool isEmpty(Queue q);
+Queue display(Queue q);
+void visualize(Queue q);
+
+
+#endif

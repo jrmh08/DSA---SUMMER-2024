@@ -16,13 +16,14 @@ ProcQ createPQ(){
 }
 
 bool isEmpty(ProcQ PQ){
-	return (PQ.front == NULL && PQ.rear == NULL);
+	return (PQ.front == NULL);
 }
 
 ProcQ input(){
 	int size, x, AT, BT;
 	char start = 'A', end = 'Z', ch;
 	ProcQ Q;
+	initProcQ(&Q);
 	
 	printf("Enter how many processes: ");
 	scanf("%d", &size);
@@ -45,11 +46,12 @@ void enqueuePQ(ProcQ *PQ, Process p){
 	
 	if(newNode != NULL){
 		newNode->proc = p;
-		newNode->next = PQ->rear;
+		newNode->next = NULL;
 		if(isEmpty(*PQ)){
 			PQ->front = newNode;
 			PQ->rear = newNode;
 		}else{
+			PQ->rear->next = newNode;
 			PQ->rear = newNode;
 		}
 		printf("enqueue success!\n");
@@ -62,10 +64,30 @@ void dequeuePQ(ProcQ *PQ){
 	ProcNodePtr temp;
 	
 	if(!isEmpty(*PQ)){
-		temp = PQ->rear;
+		temp = PQ->front;
+		PQ->front = PQ->front->next;
 		free(temp);
+		printf("dequeue success!\n");
+	}else{
+		printf("dequeue failed!\n");
 	}
 }
+
+ProcQ procSort(ProcQ *PQ){
+	Proc sorted = createPQ();
+	ProcNodePtr trav = PQ->front;
+	int ctr = 0;
+	
+	while(trav != NULL){
+		while(PQ->front->proc.AT == ctr ){
+			enqueuePQ(PQ, PQ->front->proc);
+			trav = trav->next;
+		}
+		ctr++;
+	}
+}
+
+void CPU_FCFS(ProcQ)
 
 ProcQ display(ProcQ PQ){
 	ProcQ temp = createPQ();
