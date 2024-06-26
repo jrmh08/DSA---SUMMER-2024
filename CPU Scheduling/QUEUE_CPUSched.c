@@ -76,23 +76,24 @@ void dequeuePQ(ProcQ *PQ){
 	}
 }
 
-void procSort(ProcQ *PQ){
+ProcQ procSort(ProcQ *PQ){
 	ProcNodePtr trav;
 	ProcNodePtr temp;
 	int ctr = 0, x, total = 0;
 	
 	Process sort[PQ->count];
 	
-	for(trav = PQ->front, x = 0; trav != NULL && x < PQ->count; trav = trav->next, x++){
+	for(trav = PQ->front, x = 0; trav != NULL; trav = trav->next, x++){
 		sort[x] = trav->proc;
 	}
 
-	initProcQ(PQ);
+	ProcQ sorted;
+	initProcQ(&sorted);
 	
 	while(ctr != -1){
 		for(x = 0; x < PQ->count; x++){
 			if(sort[x].AT == ctr){
-				enqueuePQ(PQ, sort[x]);
+				enqueuePQ(&sorted, sort[x]);
 				total++;
 			}
 		}
@@ -102,38 +103,65 @@ void procSort(ProcQ *PQ){
 			ctr = -1;
 		}
 	}
+	return sorted;
 }
 
 void CPU_FCFS(ProcQ *PQ){
+	ProcNodePtr trav;
+	int tempCT = 0;
+	float tempAvgTT, tempAvgWT;
+	
+	for(trav = PQ->front; trav != NULL; trav = trav->next){
+		tempCT += trav->proc.BT;
+		trav->proc.CT = tempCT;
+		trav->proc.TT = trav->proc.CT - trav->proc.AT;
+		trav->proc.WT = trav->proc.TT - trav->proc.BT;
+		PQ->avgTT += trav->proc.TT;
+		PQ->avgWT += trav->proc.WT;
+	}	
+	PQ->avgTT /= PQ->count;
+	PQ->avgWT /= PQ->count;
 }
 
 ProcQ display(ProcQ PQ){
 	ProcQ temp = createPQ();
 	Process p;
+	printf("\n\nDISPLAY OF PROCESSES:\n");
 	printf("Process %10s%10s%10s%10s%10s\n", "AT", "BT", "CT", "TT", "WT");
 	while(!isEmpty(PQ)){
 		p = PQ.front->proc;
-		printf("%10c", p.procLetter);
-		printf("%10d", p.AT);
+		printf("%4c", p.procLetter);
+		printf("%14d", p.AT);
 		printf("%10d", p.BT);
+		printf("%10d", p.CT);
+		printf("%10d", p.TT);
+		printf("%10d", p.WT);
 		printf("\n");
 		enqueuePQ(&temp, p);
 		dequeuePQ(&PQ);
 	}
+	printf("\n\n");
 	return temp;
 }
 
 void visualizePQ(ProcQ PQ){
 	ProcNodePtr trav;
 	
+	printf("\n\nVISUALIZATION OF ELEMENTS:\n");
 	printf("Process %10s%10s%10s%10s%10s\n", "AT", "BT", "CT", "TT", "WT");
 	printf("-----------------------------------------------------------\n");
 	for(trav = PQ.front; trav != NULL; trav = trav->next){
-		printf("%10c", trav->proc.procLetter);
-		printf("%10d", trav->proc.AT);
+		printf("%4c", trav->proc.procLetter);
+		printf("%14d", trav->proc.AT);
 		printf("%10d", trav->proc.BT);
+		printf("%10d", trav->proc.CT);
+		printf("%10d", trav->proc.TT);
+		printf("%10d", trav->proc.WT);
 		printf("\n");
 	}
+	printf("%48.2f", PQ.avgTT);
+	printf("%10.2f", PQ.avgWT);
+	printf("\n\n");
 }
 
 

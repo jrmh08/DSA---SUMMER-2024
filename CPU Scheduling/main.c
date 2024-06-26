@@ -6,9 +6,13 @@
 
 int main(int argc, char *argv[]) {
 	ProcQ pq = input();
-	procSort(&pq);
-	pq = display(pq);
+	ProcQ sort = procSort(&pq);
+//	pq = display(pq);
 //	visualizePQ(pq);
+	CPU_FCFS(&sort);
+	visualizePQ(sort);
+	sort = display(sort);
+	
 	
 	return 0;
 }
