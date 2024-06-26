@@ -6,6 +6,7 @@
 void initProcQ(ProcQ *PQ){
 	PQ->front = NULL;
 	PQ->rear = NULL;
+	PQ->count = 0;
 }
 
 ProcQ createPQ(){
@@ -38,6 +39,7 @@ ProcQ input(){
 		scanf("%d", &input[x].BT);
 		enqueuePQ(&Q, input[x]);
 	}
+	printf("number of processes: %d\n", Q.count);
 	return Q;
 }
 
@@ -54,6 +56,7 @@ void enqueuePQ(ProcQ *PQ, Process p){
 			PQ->rear->next = newNode;
 			PQ->rear = newNode;
 		}
+		PQ->count++;
 		printf("enqueue success!\n");
 	}else{
 		printf("enqueue failed!\n");
@@ -73,26 +76,32 @@ void dequeuePQ(ProcQ *PQ){
 	}
 }
 
-ProcQ procSort(ProcQ *PQ){
-	ProcQ sorted = createPQ();
-	ProcNodePtr *trav;
+void procSort(ProcQ *PQ){
+	ProcNodePtr trav;
 	ProcNodePtr temp;
-	int ctr = 0;
+	int ctr = 0, x, total = 0;
 	
-	while(!isEmpty(*PQ)){
-		for(trav = PQ->front; *trav != NULL; trav = &(*trav)->next){
-			if(PQ->front->proc.AT == ctr){
-				temp = *trav;
-				enqueuePQ(&sorted, (*trav)->proc);
-				if((*trav)->next != NULL){
-					*trav = (*trav)->next;
-				}
-				free(temp);	
+	Process sort[PQ->count];
+	
+	for(trav = PQ->front, x = 0; trav != NULL && x < PQ->count; trav = trav->next, x++){
+		sort[x] = trav->proc;
+	}
+
+	initProcQ(PQ);
+	
+	while(ctr != -1){
+		for(x = 0; x < PQ->count; x++){
+			if(sort[x].AT == ctr){
+				enqueuePQ(PQ, sort[x]);
+				total++;
 			}
 		}
-		ctr++;
+		if(total != PQ->count){
+			ctr++;
+		}else{
+			ctr = -1;
+		}
 	}
-	return sorted;
 }
 
 void CPU_FCFS(ProcQ *PQ){
@@ -104,7 +113,7 @@ ProcQ display(ProcQ PQ){
 	printf("Process %10s%10s%10s%10s%10s\n", "AT", "BT", "CT", "TT", "WT");
 	while(!isEmpty(PQ)){
 		p = PQ.front->proc;
-		printf("Process %10c", p.procLetter);
+		printf("%10c", p.procLetter);
 		printf("%10d", p.AT);
 		printf("%10d", p.BT);
 		printf("\n");
@@ -118,8 +127,9 @@ void visualizePQ(ProcQ PQ){
 	ProcNodePtr trav;
 	
 	printf("Process %10s%10s%10s%10s%10s\n", "AT", "BT", "CT", "TT", "WT");
+	printf("-----------------------------------------------------------\n");
 	for(trav = PQ.front; trav != NULL; trav = trav->next){
-		printf("Process %10c", trav->proc.procLetter);
+		printf("%10c", trav->proc.procLetter);
 		printf("%10d", trav->proc.AT);
 		printf("%10d", trav->proc.BT);
 		printf("\n");

@@ -6,9 +6,9 @@
 
 int main(int argc, char *argv[]) {
 	ProcQ pq = input();
-	ProcQ sorted = procSort(&pq);
-//	pq = display(sorted);
-	visualizePQ(sorted);
+	procSort(&pq);
+	pq = display(pq);
+//	visualizePQ(pq);
 	
 	return 0;
 }
