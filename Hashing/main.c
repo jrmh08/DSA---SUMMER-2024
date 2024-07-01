@@ -44,9 +44,9 @@ int main(int argc, char *argv[]) {
 	visualizeOD(animals);
 	
 	printf("Searching for: %s\n", w12.word);
-	printf("Found at index: %d\n\n", wordSearch(animals, w12));
+	printf("Found at index: %d\n\n", wordSearchOD(animals, w12));
 	
-	printf("Deleted at index: %d\n", deleteWordOD(&animals, w11));
+	printf("Deleted at index: %d\n", deleteWordOD(&animals, w14));
 	visualizeOD(animals);
 	
 	

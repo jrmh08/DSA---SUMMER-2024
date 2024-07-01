@@ -20,21 +20,13 @@ typedef struct{
 	int multiplier;
 }Dict;
 
-
-//CLOSED HASHING
-typedef struct{
-	NodePtr *elems;
-	int count;
-	int multiplier;
-}Dict;
-
 void initDictOD(Dict *D);
 Dict createDictOD();
 int hashOD(int val, int multiplier);
 void insertOD(Dict *D, Word elem);
 Dict reHashOD(Dict *D);
 int deleteWordOD(Dict *D, Word elem);
-int wordSearch(Dict D, Word elem);
+int wordSearchOD(Dict D, Word elem);
 void displayOD(Dict D);
 void visualizeOD(Dict D);
 

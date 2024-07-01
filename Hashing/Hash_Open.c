@@ -98,11 +98,11 @@ int deleteWordOD(Dict *D, Word elem){
 	printf("Hash Value is: %d", Hash);
 	
 	printf("\n\n");
-	NodePtr trav, temp;
-	for(trav = D->elems[Hash]; trav != NULL && strcmp(elem.word, trav->data.word) != 0; trav = trav->next){}
+	NodePtr *trav, temp;
+	for(trav = &D->elems[Hash]; *trav != NULL && strcmp(elem.word, (*trav)->data.word) != 0; trav = &(*trav)->next){}
 	if(trav != NULL){
-		temp = trav;
-		trav = trav->next;
+		temp = *trav;
+		*trav = (*trav)->next;
 		free(temp);
 		D->count--;
 		deleted = Hash;
@@ -112,7 +112,7 @@ int deleteWordOD(Dict *D, Word elem){
 	return deleted;
 }
 
-int wordSearch(Dict D, Word elem){
+int wordSearchOD(Dict D, Word elem){
 	int Hash = hashOD(elem.hashVal, D.multiplier);
 	int found = -1;
 	
