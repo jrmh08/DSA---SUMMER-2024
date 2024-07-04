@@ -38,18 +38,20 @@ int main(int argc, char *argv[]) {
 	insertCD(&animals, w9);
 	insertCD(&animals, w10);
 	insertCD(&animals, w11);
-//	insertCD(&animals, w12);
-//	insertCD(&animals, w13);
-//	insertCD(&animals, w14);
-//	insertCD(&animals, w15);
-//	insertCD(&animals, w16);
+	insertCD(&animals, w12);
+	insertCD(&animals, w13);
+	insertCD(&animals, w14);
+	insertCD(&animals, w15);
+	insertCD(&animals, w16);
+	insertCD(&animals, w17);
 	visualizeCD(animals);
+	displayCD(animals);
 	
-//	printf("Searching for: %s\n", w12.word);
-//	printf("Found at index: %d\n\n", wordSearchOD(animals, w12));
-//	
-//	printf("Deleted at index: %d\n", deleteWordOD(&animals, w14));
-//	visualizeOD(animals);
+	printf("Searching for: %s\n", w12.word);
+	printf("Found at index: %d\n\n", wordSearchCD(animals, w12));
+		
+	printf("Deleted at index: %d\n", deleteWordCD(&animals, w17));
+	visualizeCD(animals);
 	
 	
 	return 0;
