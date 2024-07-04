@@ -7,10 +7,10 @@
 typedef struct{
 	char word[20];
 	int hashVal;
-}Word;
+}OWord;
 
 typedef struct node{
-	Word data;
+	OWord data;
 	struct node* next;
 }Node, *NodePtr;
 
@@ -18,17 +18,17 @@ typedef struct{
 	NodePtr *elems;
 	int count;
 	int multiplier;
-}Dict;
+}ODict;
 
-void initDictOD(Dict *D);
-Dict createDictOD();
+void initDictOD(ODict *D);
+ODict createDictOD();
 int hashOD(int val, int multiplier);
-void insertOD(Dict *D, Word elem);
-Dict reHashOD(Dict *D);
-int deleteWordOD(Dict *D, Word elem);
-int wordSearchOD(Dict D, Word elem);
-void displayOD(Dict D);
-void visualizeOD(Dict D);
+void insertOD(ODict *D, OWord elem);
+ODict reHashOD(ODict *D);
+int deleteWordOD(ODict *D, OWord elem);
+int wordSearchOD(ODict D, OWord elem);
+void displayOD(ODict D);
+void visualizeOD(ODict D);
 
 
 

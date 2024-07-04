@@ -4,7 +4,7 @@
 #include "Hash_Open.h"
 
 
-void initDictOD(Dict *D){
+void initDictOD(ODict *D){
 	D->multiplier = 1;
 	D->elems = (NodePtr*)malloc((MAX * D->multiplier) * sizeof(NodePtr));
 	
@@ -15,8 +15,8 @@ void initDictOD(Dict *D){
 	D->count = 0;
 }
 
-Dict createDictOD(){
-	Dict d;
+ODict createDictOD(){
+	ODict d;
 	d.multiplier = 1;
 	d.elems = (NodePtr*)malloc((MAX * d.multiplier) * sizeof(NodePtr));
 	
@@ -33,7 +33,7 @@ int hashOD(int val, int multiplier){
 	return (val % (MAX*multiplier));
 }
 
-void insertOD(Dict *D, Word elem){
+void insertOD(ODict *D, OWord elem){
 	int check = (MAX * D->multiplier) * 0.65;
 	printf("the packing density is: %d\n\n", check);
 	printf("multiplier is: %d\n\n", D->multiplier);
@@ -63,8 +63,8 @@ void insertOD(Dict *D, Word elem){
 	}
 }
 
-Dict reHashOD(Dict *D){
-	Dict reHashed;
+ODict reHashOD(ODict *D){
+	ODict reHashed;
 	int oldMax = MAX * D->multiplier;
 	D->multiplier++;
 	reHashed.multiplier = D->multiplier;
@@ -92,7 +92,7 @@ Dict reHashOD(Dict *D){
 	return reHashed;
 }
 
-int deleteWordOD(Dict *D, Word elem){
+int deleteWordOD(ODict *D, OWord elem){
 	int Hash = hashOD(elem.hashVal, D->multiplier);
 	int deleted = -1;
 	printf("Hash Value is: %d", Hash);
@@ -112,7 +112,7 @@ int deleteWordOD(Dict *D, Word elem){
 	return deleted;
 }
 
-int wordSearchOD(Dict D, Word elem){
+int wordSearchOD(ODict D, OWord elem){
 	int Hash = hashOD(elem.hashVal, D.multiplier);
 	int found = -1;
 	
@@ -125,7 +125,7 @@ int wordSearchOD(Dict D, Word elem){
 	return found;
 }
 
-void displayOD(Dict D){
+void displayOD(ODict D){
 	NodePtr trav;
 	int x, max = MAX * D.multiplier;
 	
@@ -144,7 +144,7 @@ void displayOD(Dict D){
 	}
 }
 
-void visualizeOD(Dict D){
+void visualizeOD(ODict D){
 	NodePtr trav;
 	int x, max = MAX * D.multiplier;
 	
