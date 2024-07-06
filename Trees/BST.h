@@ -23,9 +23,10 @@ typedef struct node{
 //BFS (QUEUES)
 //DFS -INORDER -POSTORDER -PREORDER
 
-void initBST(NodePtr *BST);
-void insertProd(NodePtr *BST, Product elem);
-void deleteProd(NodePtr *BST, char prodname[]);
+void initBST(NodePtr *bst);
+void insertProd(NodePtr *bst, Product elem);
+void deleteProd(NodePtr *bst, char prodname[]);
+void visualizeBST(NodePtr bst);
 
 
 #endif
