@@ -17,10 +17,10 @@ typedef struct node{
 	struct node *left, *right;
 }NodeType, *NodePtr;
 
-//ADD 
+//ADD //
 //DELETE
 //TRAVERSAL: below
-//BFS (QUEUES)
+//BFS (QUEUES) 
 //DFS -INORDER -POSTORDER -PREORDER
 
 void initBST(NodePtr *bst);

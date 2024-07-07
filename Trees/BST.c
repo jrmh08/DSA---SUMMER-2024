@@ -27,8 +27,25 @@ void insertProd(NodePtr *bst, Product elem){
 	}
 }
 
-void deleteProd(NodePtr *bst, char prodname[]){
+//1. Find the node to be deleted.
+//2. If the node to be deleted has no children (it's a leaf), simply remove it.
+//3. If the node to be deleted has one child, replace the node with its child.
+//4. If the node to be deleted has two children:
+//		-Find the in-order successor (smallest node in the right subtree) or in-order predecessor (largest node in the left subtree).
+//		-Replace the node's value with the in-order successor or predecessor's value.
+//		-Delete the in-order successor or predecessor node.
+void deleteProd(NodePtr *bst, Product elem){
+	NodePtr trav, temp;
 	
+	for(trav = bst; *trav != NULL && strcmp(elem.prodName, trav->item.prodName) != 0;){
+		if(strcmp(elem.prodName, trav->item.prodName) > 0){
+			trav = &(*trav)->right;
+		}else{
+			trav = &(*trav)->left;
+		}
+	}
+	temp = trav;
+	trav = 
 }
 
 void visualizeBST(NodePtr bst){
