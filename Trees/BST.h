@@ -24,8 +24,9 @@ typedef struct node{
 //DFS -INORDER -POSTORDER -PREORDER
 
 void initBST(NodePtr *bst);
+bool isMember(NodePtr *bst, Product elem);
 void insertProd(NodePtr *bst, Product elem);
-void deleteProd(NodePtr *bst, char prodname[]);
+void deleteProd(NodePtr *bst, Product elem);
 void visualizeBST(NodePtr bst);
 
 

@@ -1,16 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "BST.h"
 
 void initBST(NodePtr *bst){
 	*bst = NULL;
 }
 
+bool isMember(NodePtr *bst, Product elem){
+	NodePtr *trav;
+	
+	for(trav = bst; *trav != NULL && strcmp(elem.prodName, (*trav)->item.prodName) != 0;){
+		if(strcmp(elem.prodName, (*trav)->item.prodName) > 0){
+			trav = &(*trav)->right;
+		}else{
+			trav = &(*trav)->left;
+		}
+	}
+	return (*trav != NULL && strcmp(elem.prodName, (*trav)->item.prodName) == 0);
+}
+
 void insertProd(NodePtr *bst, Product elem){
 	NodePtr newNode = (NodePtr)malloc(sizeof(NodeType));
 	NodePtr *trav;
-	
-	
 	
 	if(newNode != NULL){
 		newNode->item = elem;
@@ -37,15 +49,11 @@ void insertProd(NodePtr *bst, Product elem){
 void deleteProd(NodePtr *bst, Product elem){
 	NodePtr trav, temp;
 	
-	for(trav = bst; *trav != NULL && strcmp(elem.prodName, trav->item.prodName) != 0;){
-		if(strcmp(elem.prodName, trav->item.prodName) > 0){
-			trav = &(*trav)->right;
-		}else{
-			trav = &(*trav)->left;
-		}
+	if(isMember(*bst, elem)){
+		
 	}
-	temp = trav;
-	trav = 
+//	temp = trav;
+//	trav = 
 }
 
 void visualizeBST(NodePtr bst){
