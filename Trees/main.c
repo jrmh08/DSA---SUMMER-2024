@@ -22,13 +22,26 @@ int main(int argc, char *argv[]) {
 	insertProd(&tr, p4);
 	insertProd(&tr, p5);
 	insertProd(&tr, p6);
+//	insertProd(&tr, p7);
 	
 	visualizeBST(tr);
 	
-	bool member = isMember(&tr, p7);
-	printf("\n\nIs %s a member? %d", p7.prodName, member);
+	bool member = isMember(&tr, p3);
+	printf("\n\nIs %s a member? %d\n\n", p3.prodName, member);
 	
+	printf("\nDeleting [%s] from the list", p6.prodName);
+	deleteProd(&tr, p6);
 	
+	printf("\n\nIs %s a member? %d\n\n", p6.prodName, isMember(&tr, p6));
+	printf("\n\nIs %s a member? %d\n\n", p4.prodName, isMember(&tr, p4));
+	
+	DFS_preorder(tr);
+	printf("\n");
+	DFS_postorder(tr);
+	printf("\n");
+	DFS_inorder(tr);
+	printf("\n");
+//	visualizeBST(tr);
 	
 	return 0;
 }
