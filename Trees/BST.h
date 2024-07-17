@@ -26,10 +26,10 @@ typedef struct node{
 //DFS -INORDER -POSTORDER -PREORDER
 
 void initBST(NodePtr *bst);
-//void initQueue()
 bool isMember(NodePtr *bst, Product elem);
 void insertProd(NodePtr *bst, Product elem);
 void deleteProd(NodePtr *bst, Product elem);
+Product deleteMax(NodePtr *bst);
 void BFS(NodePtr bst);
 void DFS_preorder(NodePtr bst);
 void DFS_inorder(NodePtr bst);

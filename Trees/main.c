@@ -35,13 +35,15 @@ int main(int argc, char *argv[]) {
 	printf("\n\nIs %s a member? %d\n\n", p6.prodName, isMember(&tr, p6));
 	printf("\n\nIs %s a member? %d\n\n", p4.prodName, isMember(&tr, p4));
 	
+	BFS(tr);
+	printf("\n\n");
 	DFS_preorder(tr);
 	printf("\n");
 	DFS_postorder(tr);
 	printf("\n");
 	DFS_inorder(tr);
-	printf("\n");
-//	visualizeBST(tr);
+	printf("\n\n");
+	visualizeBST(tr);
 	
 	return 0;
 }

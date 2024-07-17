@@ -4,6 +4,8 @@
 #include <string.h>
 #include "BST.h"
 
+#define SIZE 15
+
 void initBST(NodePtr *bst){
 	*bst = NULL;
 }
@@ -12,11 +14,6 @@ bool isMember(NodePtr *bst, Product elem){
 	NodePtr *trav;
 	
 	for(trav = bst; *trav != NULL && strcmp(elem.prodName, (*trav)->item.prodName) != 0;){
-//		if(strcmp(elem.prodName, (*trav)->item.prodName) > 0){
-//			trav = &(*trav)->right;
-//		}else{
-//			trav = &(*trav)->left;
-//		}
 		trav = (strcmp(elem.prodName, (*trav)->item.prodName) > 0)? &(*trav)->right : &(*trav)->left;
 	}
 	return (*trav != NULL);
@@ -45,39 +42,59 @@ void insertProd(NodePtr *bst, Product elem){
 //		-Replace the node's value with the in-order successor or predecessor's value.
 //		-Delete the in-order successor or predecessor node.
 void deleteProd(NodePtr *bst, Product elem){
-	NodePtr *trav, temp, *found;
+	NodePtr *trav;
 	
 	if(isMember(bst, elem)){
-		printf("\nDeleting %s\n", elem.prodName);
-		for(trav = bst; *trav != NULL && strcmp(elem.prodName, (*trav)->item.prodName) != 0;){
-			if(strcmp(elem.prodName, (*trav)->item.prodName) > 0){
-				trav = &(*trav)->right;
-			}else{
-				trav = &(*trav)->left;
-			}
-		}              
-		if(*trav != NULL){
-			temp = *trav;
-			if(temp->left != NULL || temp->right != NULL){
-				if((*trav)->left != NULL){
-					found = &(*trav)->left;
-					for(found = trav; *found != NULL;){
-						found = &(*found)->right;
-					}
-					(*found)->item.expDate = temp->item.expDate;
-					strcpy(temp->item.prodName, (*found)->item.prodName);
-					(*found)->item.prodPrice = temp->item.prodPrice;
-					(*found)->item.prodQty = temp->item.prodQty;
-					free(*found);
-				}else{
-					found = &(*trav)->right;
-				}
-			}
+		for(trav = bst; *trav != NULL && strcmp((*trav)->item.prodName, elem.prodName) != 0; ){
+			trav = (strcmp((*trav)->item.prodName, elem.prodName) > 0)? &(*trav)->left : &(*trav)->right;
+		}
+	}
+	
+	if(*trav != NULL){
+		NodePtr temp;
+		temp = *trav;
+		
+		if(temp->left == NULL || temp->right == NULL){ // for one or no child
+			*trav = (temp->left != NULL)? temp->left : temp->right;
 			free(temp);
-			printf("\nDelete Success!\n");
-		}                        
-	}else{
-		printf("\nDelete Failed!");
+		}else{ 
+			temp->item = deleteMax(&temp->left);
+		}
+	}
+}
+
+Product deleteMax(NodePtr *bst){
+	NodePtr *trav, temp;
+	Product retval;
+	
+	for(trav = bst;  *trav != NULL && (*trav)->right != NULL; trav = &(*trav)->right){}
+	
+	if(*trav != NULL){
+		temp = *trav;
+		retval = (*trav)->item;
+		*trav = temp->left;
+		free(temp);
+	}
+}
+
+void BFS(NodePtr bst){
+	NodePtr tempQueue[SIZE], current;
+	int front = 1, rear = 0;
+	
+	if(bst != NULL){
+		for(tempQueue[++rear] = bst; front !=  (rear + 1) & SIZE;){
+			current = tempQueue[front];
+			front  = (front +1) % SIZE;
+			
+			if(current != NULL){
+				printf("%s ", current->item.prodName);
+				
+				rear = (rear + 1) % SIZE;
+				tempQueue[rear] = current->left;
+				rear = (rear + 1) % SIZE;
+				tempQueue[rear] = current->right;
+			}
+		}
 	}
 }
 
